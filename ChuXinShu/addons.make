@@ -1,0 +1,5 @@
+ofxAvCodec
+ofxNetwork
+ofxOsc
+ofxPoco
+ofxXmlSettings
