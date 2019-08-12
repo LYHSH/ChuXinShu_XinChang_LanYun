@@ -2,4 +2,5 @@ ofxAvCodec
 ofxNetwork
 ofxOsc
 ofxPoco
+ofxTuioWrapper
 ofxXmlSettings

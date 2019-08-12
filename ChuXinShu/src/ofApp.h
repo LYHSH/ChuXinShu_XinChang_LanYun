@@ -3,6 +3,10 @@
 #include "ofMain.h"
 #include "frameSynAvServer.h"
 #include "myContants.h"
+#include "largeStars.h"
+#include "showItem.h"
+#include "ofxUDPManager.h"
+#include "ofxTuioClient.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,6 +26,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void exit();
 		
 		enum GameState
 		{
@@ -38,5 +43,17 @@ class ofApp : public ofBaseApp{
 		void goToSwitch();
 		void goToShowing();
 
+		largeStars stars;
 
+		vector<ofImage> imgs;
+
+		vector<showItem *> items;
+
+		ofxUDPManager centerListener;
+
+		ofxTuioClient myTuio;
+
+		void touchDown(ofTouchEventArgs & touch);
+		void touchUp(ofTouchEventArgs & touch);
+		void touchMoved(ofTouchEventArgs & touch);
 };

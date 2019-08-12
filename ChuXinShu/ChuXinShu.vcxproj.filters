@@ -7,6 +7,9 @@
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
+		<ClCompile Include="src\largeStars.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
@@ -90,6 +93,21 @@
 		</ClCompile>
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxPoco\src\ofxXmlPoco.cpp">
 			<Filter>addons\ofxPoco\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioClient.cpp">
+			<Filter>addons\ofxTuioWrapper\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioServer.cpp">
+			<Filter>addons\ofxTuioWrapper\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioClient.cpp">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioServer.cpp">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioTime.cpp">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
 			<Filter>addons\ofxXmlSettings\src</Filter>
@@ -189,6 +207,15 @@
 		<Filter Include="addons\ofxPoco\src">
 			<UniqueIdentifier>{C7D4269D-D8A9-A7BB-531B-98DA}</UniqueIdentifier>
 		</Filter>
+		<Filter Include="addons\ofxTuioWrapper">
+			<UniqueIdentifier>{493B74E7-DB7E-A4C2-A4A2-EC27}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxTuioWrapper\src">
+			<UniqueIdentifier>{1089B786-A967-183B-2738-2DD5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxTuioWrapper\src\TUIO">
+			<UniqueIdentifier>{6BD78B73-7FEC-9439-8E8A-7854}</UniqueIdentifier>
+		</Filter>
 		<Filter Include="addons\ofxXmlSettings">
 			<UniqueIdentifier>{877F005D-13E6-0592-1D97-F2E3}</UniqueIdentifier>
 		</Filter>
@@ -203,10 +230,16 @@
 		<ClInclude Include="src\ofApp.h">
 			<Filter>src</Filter>
 		</ClInclude>
+		<ClInclude Include="src\largeStars.h">
+			<Filter>src</Filter>
+		</ClInclude>
 		<ClInclude Include="src\myContants.h">
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofxEasing.h">
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\showItem.h">
@@ -667,6 +700,36 @@
 		</ClInclude>
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxPoco\src\ofxXmlPoco.h">
 			<Filter>addons\ofxPoco\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioClient.h">
+			<Filter>addons\ofxTuioWrapper\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioServer.h">
+			<Filter>addons\ofxTuioWrapper\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioClient.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioContainer.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioCursor.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioListener.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioObject.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioPoint.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioServer.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioTime.h">
+			<Filter>addons\ofxTuioWrapper\src\TUIO</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
 			<Filter>addons\ofxXmlSettings\src</Filter>
