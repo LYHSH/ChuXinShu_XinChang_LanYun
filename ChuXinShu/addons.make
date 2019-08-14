@@ -1,4 +1,5 @@
 ofxAvCodec
+ofxEasing
 ofxNetwork
 ofxOsc
 ofxPoco

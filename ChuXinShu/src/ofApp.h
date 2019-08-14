@@ -7,6 +7,7 @@
 #include "showItem.h"
 #include "ofxUDPManager.h"
 #include "ofxTuioClient.h"
+#include "itemMgr.h"
 
 class ofApp : public ofBaseApp{
 
@@ -43,12 +44,6 @@ class ofApp : public ofBaseApp{
 		void goToSwitch();
 		void goToShowing();
 
-		largeStars stars;
-
-		vector<ofImage> imgs;
-
-		vector<showItem *> items;
-
 		ofxUDPManager centerListener;
 
 		ofxTuioClient myTuio;
@@ -56,4 +51,11 @@ class ofApp : public ofBaseApp{
 		void touchDown(ofTouchEventArgs & touch);
 		void touchUp(ofTouchEventArgs & touch);
 		void touchMoved(ofTouchEventArgs & touch);
+
+
+		itemMgr myItemMgr;
+
+		ofFbo fbo;
+		float initTime;
+		float moveY;
 };

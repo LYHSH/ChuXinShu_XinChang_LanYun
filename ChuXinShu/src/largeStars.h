@@ -19,6 +19,10 @@ public:
 	void setup();
 	void update();
 	void draw();
+
+	void mousePressed(int x, int y, int button);
+
+	bool isMasking();
 private:
 	ofImage * _pTex;
 	ofRectangle birthRect;
@@ -27,5 +31,9 @@ private:
 	ofRectangle targetRect;
 
 	float initTime;
+
+	bool isShowing;
+
+	float alpha = 0.0f;
 };
 

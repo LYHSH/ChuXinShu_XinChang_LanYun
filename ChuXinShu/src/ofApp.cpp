@@ -2,29 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-//	goToLoop();
-	stars.setup();
+	goToLoop();
 
-	{
-		ofDirectory dir;
-		dir.allowExt("png");
-
-		dir.listDir("photos/imgs/");
-		imgs.resize(dir.size());
-		for (int i = 0;i < dir.size();i++)
-		{
-			imgs[i].load(dir.getPath(i));
-		}
-	}
-
-	{
-		items.resize(20);
-		for (int i = 0;i < items.size();i++)
-		{
-			items[i] = new showItem();
-			items[i]->setup(&imgs[ofRandom(imgs.size())], ofVec2f(ofRandom(SCREEN_W), ofRandom(SCREEN_H)));
-		}
-	}
+	myItemMgr.setup();
 
 	{
 		centerListener.Create();
@@ -42,6 +22,10 @@ void ofApp::setup(){
 		ofAddListener(ofEvents().touchDown, this, &ofApp::touchDown);
 		ofAddListener(ofEvents().touchUp, this, &ofApp::touchUp);
 		ofAddListener(ofEvents().touchMoved, this, &ofApp::touchMoved);
+	}
+
+	{
+		fbo.allocate(SCREEN_W, SCREEN_H);
 	}
 
 	ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
@@ -69,52 +53,74 @@ void ofApp::update(){
 
 	myTuio.update();
 
-// 	switch (gameState)
-// 	{
-// 	case ofApp::STATE_LOOP:
-// 	{
-// 		backVideo.update();
-// 	}
-// 		break;
-// 	case ofApp::STATE_SWITCH:
-// 		break;
-// 	case ofApp::STATE_SHOWING:
-// 		break;
-// 	default:
-// 		break;
-// 	}
-
-	stars.update();
-
-	for (int i = 0; i < items.size(); i++)
+ 	switch (gameState)
+ 	{
+ 	case ofApp::STATE_LOOP:
+ 	{
+ 		backVideo.update();
+ 	}
+ 		break;
+ 	case ofApp::STATE_SWITCH:
 	{
-		items[i]->update();
+		backVideo.update();
+
+		//if (!backVideo.isPlaying() && backVideo.getPosition() > 0.9f)
+		if (backVideo.getPosition() > 0.99f)
+		{
+			fbo.begin();
+			ofClear(0);
+			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+			fbo.end();
+			initTime = ofGetElapsedTimef();
+			goToShowing();
+		}
 	}
+		
+ 		break;
+ 	case ofApp::STATE_SHOWING:
+	{
+		backVideo.update();
+		myItemMgr.update();
+
+		auto duration = 1.0f;
+		auto endTime = initTime + duration;
+		auto now = ofGetElapsedTimef();
+		moveY = ofxeasing::map_clamp(now, initTime, endTime, 0.0f, SCREEN_H, &ofxeasing::linear::easeIn);
+	}
+		
+ 		break;
+ 	default:
+ 		break;
+ 	}
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofBackground(0);
 	ofScale(SCREEN_SCALE, SCREEN_SCALE);
-// 	switch (gameState)
-// 	{
-// 	case ofApp::STATE_LOOP:
-// 	{
-// 		backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
-// 	}
-// 		break;
-// 	case ofApp::STATE_SWITCH:
-// 		break;
-// 	case ofApp::STATE_SHOWING:
-// 		break;
-// 	default:
-// 		break;
-// 	}
-	for (int i = 0; i < items.size(); i++)
+	switch (gameState)
 	{
-		items[i]->draw();
+	case ofApp::STATE_LOOP:
+	{
+		backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
 	}
-	stars.draw();
+		break;
+	case ofApp::STATE_SWITCH:
+	{
+		backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+	}
+		break;
+	case ofApp::STATE_SHOWING:
+	{
+		backVideo.draw(0, -SCREEN_H + moveY, SCREEN_W, SCREEN_H);
+		fbo.draw(0,moveY,SCREEN_W,SCREEN_H);
+		myItemMgr.draw();
+	}
+		break;
+	default:
+		break;
+	}
 }
 
 //--------------------------------------------------------------
@@ -133,16 +139,6 @@ void ofApp::keyPressed(int key){
 	default:
 		break;
 	}
-
-	if ('g' == key)
-	{
-		ofRectangle rect = ofRectangle(ofRandom(0,SCREEN_W),ofRandom(0,SCREEN_H), ofRandom(100, 300),ofRandom(100,300));
-		stars.doShowing(&imgs[ofRandom(imgs.size())],rect);
-	}
-	else if ('q' == key)
-	{
-		stars.doHiding();
-	}
 }
 
 //--------------------------------------------------------------
@@ -152,38 +148,89 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-	for (int i = 0; i < items.size(); i++)
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+
+	switch (gameState)
 	{
-		items[i]->mouseMoved(x, y);
+	case ofApp::STATE_LOOP:
+		break;
+	case ofApp::STATE_SWITCH:
+		break;
+	case ofApp::STATE_SHOWING:
+	{
+		myItemMgr.mouseMoved(x, y);
 	}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	for (int i = 0; i < items.size(); i++)
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+	switch (gameState)
 	{
-		items[i]->mouseDragged(x, y,button);
+	case ofApp::STATE_LOOP:
+		break;
+	case ofApp::STATE_SWITCH:
+		break;
+	case ofApp::STATE_SHOWING:
+	{
+		myItemMgr.mouseDragged(x, y, button);
 	}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	for (int i = 0; i < items.size(); i++)
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+
+	switch (gameState)
 	{
-		items[i]->mousePressed(x, y,button);
+	case ofApp::STATE_LOOP:
+		break;
+	case ofApp::STATE_SWITCH:
+		break;
+	case ofApp::STATE_SHOWING:
+	{
+		myItemMgr.mousePressed(x, y, button);
 	}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	for (int i = 0; i < items.size(); i++)
+	x /= SCREEN_SCALE;
+	y /= SCREEN_SCALE;
+
+	switch (gameState)
 	{
-		if (items[i]->mouseReleased(x, y, button))
-		{
-			//ofRectangle rect = ofRectangle(ofRandom(0, SCREEN_W), ofRandom(0, SCREEN_H), ofRandom(100, 300), ofRandom(100, 300));
-			stars.doShowing(items[i]->getTex(), items[i]->getRect());
-		}
+	case ofApp::STATE_LOOP:
+		break;
+	case ofApp::STATE_SWITCH:
+		break;
+	case ofApp::STATE_SHOWING:
+	{
+		myItemMgr.mouseReleased(x, y, button);
 	}
+		break;
+	default:
+		break;
+	}
+	
 }
 
 //--------------------------------------------------------------
@@ -236,7 +283,7 @@ void ofApp::goToLoop()
 
 void ofApp::goToSwitch()
 {
-	gameState = STATE_LOOP;
+	gameState = STATE_SWITCH;
 
 	ofDirectory dir;
 	dir.allowExt("mov");

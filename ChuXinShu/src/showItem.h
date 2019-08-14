@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxEasing.h"
+#include "myContants.h"
 /************************************************************************/
 /* file:
 /* date:2019.8.11
@@ -13,6 +14,7 @@ public:
 	~showItem();
 
 	void setup(ofImage * _p,ofVec2f _pos);
+	void setup(ofImage * _p, ofRectangle _rect);
 	void update();
 	void draw();
 
@@ -24,6 +26,7 @@ public:
 	ofImage * getTex();
 	ofRectangle getRect();
 
+	bool isOut();
 private:
 	ofRectangle rect;
 
@@ -31,10 +34,10 @@ private:
 	ofVec2f pos;
 	float w, h;
 
+	ofVec2f vec;
+
 	float initTime;
-
 	bool isTouching; 
-
 	float size;
 	float touchSize;
 };
