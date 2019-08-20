@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	goToLoop();
+	//goToShowing();
 
 	myItemMgr.setup();
 
@@ -121,6 +122,11 @@ void ofApp::draw(){
 	default:
 		break;
 	}
+
+	ofPushStyle();
+	ofSetColor(255, 0, 0);
+	ofDrawBitmapString(ofToString(backVideo.getPosition()), 20, 20);
+	ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -322,6 +328,8 @@ void ofApp::exit()
 	ofRemoveListener(ofEvents().touchDown, this, &ofApp::touchDown);
 	ofRemoveListener(ofEvents().touchUp, this, &ofApp::touchUp);
 	ofRemoveListener(ofEvents().touchMoved, this, &ofApp::touchMoved);
+
+	Tweenzor::destroy();
 }
 
 void ofApp::touchDown(ofTouchEventArgs & touch) {

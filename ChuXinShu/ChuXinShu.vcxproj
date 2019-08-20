@@ -100,10 +100,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxTweenzor\src;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN;WIN32</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
       <AdditionalOptions>-DPOCO_STATIC</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -112,7 +112,6 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies);avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;PocoCryptomdd.lib;PocoDatamdd.lib;PocoDataSQLitemdd.lib;PocoFoundationmdd.lib;PocoJSONmdd.lib;PocoNetmdd.lib;PocoNetSSLmdd.lib;PocoPDFmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;PocoZipmdd.lib;iphlpapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\..\..\..\addons\ofxAvCodec\libs\lib\vs\Win32;..\..\..\..\..\..\addons\ofxPoco\libs\poco\lib\vs\Win32\Debug;..\..\..\..\..\..\addons\ofxPoco</AdditionalLibraryDirectories>
-      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -123,7 +122,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxTweenzor\src;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -145,11 +144,11 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxTweenzor\src;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
-      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN;WIN32</PreprocessorDefinitions>
       <AdditionalOptions>-DPOCO_STATIC</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -171,7 +170,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs;..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include;..\..\..\..\..\..\addons\ofxAvCodec\src;..\..\..\..\..\..\addons\ofxEasing\src;..\..\..\..\..\..\addons\ofxNetwork\src;..\..\..\..\..\..\addons\ofxOsc\libs;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\..\..\..\..\addons\ofxOsc\libs\oscpack\src\osc;..\..\..\..\..\..\addons\ofxOsc\src;..\..\..\..\..\..\addons\ofxPoco\libs\poco\include;..\..\..\..\..\..\addons\ofxPoco\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src;..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO;..\..\..\..\..\..\addons\ofxTweenzor\src;..\..\..\..\..\..\addons\ofxXmlSettings\libs;..\..\..\..\..\..\addons\ofxXmlSettings\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <PreprocessorDefinitions>OSC_HOST_LITTLE_ENDIAN</PreprocessorDefinitions>
@@ -190,9 +189,9 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\itemMgr.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\itemMgr.cpp" />
     <ClCompile Include="src\largeStars.cpp" />
     <ClCompile Include="src\showItem.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxAvCodec\src\frameSynAvClient.cpp" />
@@ -225,14 +224,16 @@
     <ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioClient.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioServer.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioTime.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\addons\ofxTweenzor\src\Tween.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\addons\ofxTweenzor\src\Tweenzor.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\itemMgr.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\itemMgr.h" />
     <ClInclude Include="src\largeStars.h" />
     <ClInclude Include="src\myContants.h" />
     <ClInclude Include="src\showItem.h" />
@@ -399,6 +400,12 @@
     <ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioPoint.h" />
     <ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioServer.h" />
     <ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\TUIO\TuioTime.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\ofxTweenzor.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\Tween.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\TweenEvent.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\TweenFunctions.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\TweenSelector.h" />
+    <ClInclude Include="..\..\..\..\..\..\addons\ofxTweenzor\src\Tweenzor.h" />
     <ClInclude Include="..\..\..\..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
     <ClInclude Include="..\..\..\..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
   </ItemGroup>

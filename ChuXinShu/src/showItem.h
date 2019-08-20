@@ -2,6 +2,7 @@
 #include "ofMain.h"
 #include "ofxEasing.h"
 #include "myContants.h"
+#include "ofxTweenzor.h"
 /************************************************************************/
 /* file:
 /* date:2019.8.11
@@ -36,9 +37,10 @@ private:
 
 	ofVec2f vec;
 
-	float initTime;
-	bool isTouching; 
 	float size;
-	float touchSize;
+	float const normaleSize = 1.0f;
+	float const selectSize = 1.1f;
+
+	float duration = 0.1f;
 };
 

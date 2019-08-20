@@ -52,7 +52,6 @@ class ofApp : public ofBaseApp{
 		void touchUp(ofTouchEventArgs & touch);
 		void touchMoved(ofTouchEventArgs & touch);
 
-
 		itemMgr myItemMgr;
 
 		ofFbo fbo;

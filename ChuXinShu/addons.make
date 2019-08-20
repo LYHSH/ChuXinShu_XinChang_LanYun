@@ -4,4 +4,5 @@ ofxNetwork
 ofxOsc
 ofxPoco
 ofxTuioWrapper
+ofxTweenzor
 ofxXmlSettings
