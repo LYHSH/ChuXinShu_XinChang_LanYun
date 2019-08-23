@@ -16,24 +16,32 @@ public:
 
 	void setup(ofImage * _p,ofVec2f _pos);
 	void setup(ofImage * _p, ofRectangle _rect);
+	void setup(ofImage * _p, ofRectangle _rect,vector<string> _texts);
+	void setBackTex(ofImage * _tex);
 	void update();
 	void draw();
 
 	void mouseMoved(int x, int y);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
-	bool mouseReleased(int x, int y, int button);
+	void mouseReleased(int x, int y, int button);
+
+	bool isTouch(int _x,int _y);
 
 	ofImage * getTex();
 	ofRectangle getRect();
 
 	bool isOut();
+
+	vector<string> getTexts();
 private:
 	ofRectangle rect;
-
+	ofImage * backTex;
 	ofImage * pTex;
+	vector<string> texts;
 	ofVec2f pos;
 	float w, h;
+	const float boardSpaceDensity = 0.065f;		//±ß¿ò±ÈÀý
 
 	ofVec2f vec;
 

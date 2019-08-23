@@ -12,31 +12,21 @@ itemMgr::~itemMgr()
 
 void itemMgr::setup()
 {
-	birthRects.resize(3);
-
-	birthRects[0].setFromCenter(ofVec2f(180, -200), 340, 340);
-	birthRects[1].setFromCenter(ofVec2f(540, -250), 340, 340);
-	birthRects[2].setFromCenter(ofVec2f(900, -220), 340, 340);
+	loadData();
+	star.setup();
 
 	{
-		ofDirectory dir;
-		dir.allowExt("png");
-
-		dir.listDir("photos/imgs/");
-		imgs.resize(dir.size());
-		for (int i = 0; i < dir.size(); i++)
-		{
-			imgs[i].load(dir.getPath(i));
-		}
+		minBirthx = 0 + boundSpace + imgWidth/2.0f;
+		maxBirthx = SCREEN_W - boundSpace - imgWidth / 2.0f;
+		middleX = SCREEN_W * 0.5f;
+		lastRandomX = ofRandom(minBirthx, maxBirthx);
 	}
-
-	star.setup();
+	reset();
 }
 
 void itemMgr::update()
 {
-	//if ((int)ofRandom(10) == 1)
-	if (1)
+	if (true)
 	{
 		auto item = createItem();
 		if (NULL != item)
@@ -83,28 +73,44 @@ void itemMgr::draw()
 
 showItem * itemMgr::createItem()
 {
-	for (int i = 0;i <birthRects.size();i++)
+	if (!(nextIndex >= 0 && nextIndex < itemDatas.size()))
 	{
-		auto birthRect = birthRects[i];
-		bool flag = true;
+		//ofLogError() << "index out of range" << endl;
+		return NULL;
+	}
+	
+	auto & itemData = itemDatas[nextIndex];
 
-		auto ite = items.begin();
-		while (items.end() != ite)
-		{
-			if ((*ite)->getRect().intersects(birthRect))		//矩形相交
-			{
-				flag = false;
-				break;
-			}
-			ite++;
-		}
+	float x;
+	if (lastRandomX > middleX)
+	{
+		x = ofRandom(minBirthx,middleX - 0.0f);		//左侧生成
+	}
+	else
+	{
+		x = ofRandom(middleX + 0.0f, maxBirthx);			//右侧生成
+	}
+	
+	float y = -(itemData.tex->getHeight() * 0.5f);
 
-		if (flag)
-		{
-			showItem * p = new showItem();
-			p->setup(&imgs[ofRandom(imgs.size())], birthRect);
-			return p;
-		}
+	randomBirthRect.setFromCenter(x, y, itemData.tex->getWidth(), itemData.tex->getHeight());
+	ofRectangle hotRect;				//识别判断是否遮挡区域
+	hotRect.setFromCenter(x, y, itemData.tex->getWidth() * 1.2f, itemData.tex->getHeight() * 1.2f);
+
+	bool flag = true;
+	if (!items.empty() && (items.back())->getRect().getTop() < hotRect.getBottom())		//Y轴不碰到
+	{
+		flag = false;
+	}
+
+	if (flag)
+	{
+		lastRandomX = x;
+		showItem * p = new showItem();
+		p->setup(itemData.tex, randomBirthRect,itemData.texts);
+		p->setBackTex(&itemBacktex);
+		nextIndex = (++nextIndex) % itemDatas.size();
+		return p;
 	}
 	
 	return NULL;
@@ -112,28 +118,41 @@ showItem * itemMgr::createItem()
 
 //--------------------------------------------------------------
 void itemMgr::mouseMoved(int x, int y) {
-	if (!star.isMasking())
-	{
-		for (auto ite = items.begin(); ite != items.end(); ite++)
-		{
-			(*ite)->mouseMoved(x, y);
-		}
-	}
+// 	if (!star.isMasking())
+// 	{
+// 		for (auto ite = items.begin(); ite != items.end(); ite++)
+// 		{
+// 			(*ite)->mouseMoved(x, y);
+// 		}
+// 	}
 }
 
 //--------------------------------------------------------------
 void itemMgr::mouseDragged(int x, int y, int button) {
-	if (!star.isMasking())
-	{
-		for (auto ite = items.begin(); ite != items.end(); ite++)
-		{
-			(*ite)->mouseDragged(x, y, button);
-		}
-	}
+// 	if (!star.isMasking())
+// 	{
+// 		for (auto ite = items.begin(); ite != items.end(); ite++)
+// 		{
+// 			(*ite)->mouseDragged(x, y, button);
+// 		}
+// 	}
 }
 
 //--------------------------------------------------------------
 void itemMgr::mousePressed(int x, int y, int button) {
+	if (!star.isMasking())
+	{
+		for (auto ite = items.begin(); ite != items.end(); ite++)
+		{
+			if ((*ite)->isTouch(x, y))
+			{
+				//star.doShowing((*ite)->getTex(), (*ite)->getRect());
+				star.doShowing((*ite)->getTex(), (*ite)->getRect(),&itemBacktex,(*ite)->getTexts());
+			}
+		}
+	}
+
+
 	if (!star.isMasking())
 	{
 		for (auto ite = items.begin(); ite != items.end(); ite++)
@@ -148,16 +167,13 @@ void itemMgr::mousePressed(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void itemMgr::mouseReleased(int x, int y, int button) {
-	if (!star.isMasking())
-	{
-		for (auto ite = items.begin(); ite != items.end(); ite++)
-		{
-			if ((*ite)->mouseReleased(x, y, button))
-			{
-				star.doShowing((*ite)->getTex(), (*ite)->getRect());
-			}
-		}
-	}	
+// 	if (!star.isMasking())
+// 	{
+// 		for (auto ite = items.begin(); ite != items.end(); ite++)
+// 		{
+// 			(*ite)->mouseReleased(x,y,button);
+// 		}
+// 	}
 }
 
 void itemMgr::reset()
@@ -172,4 +188,40 @@ void itemMgr::reset()
 		delete obj;
 		obj = NULL;
 	}
+
+	nextIndex = 0;
+}
+
+void itemMgr::loadData()
+{
+	ofxXmlSettings xml;
+	xml.load("photos/photo.xml");
+
+	int nums = xml.getNumTags("photo");
+	itemDatas.resize(nums);
+	for (int i = 0;i < nums;i++)
+	{
+		xml.pushTag("photo", i);
+		itemDatas[i].tex = new ofImage();
+
+		auto * p = itemDatas[i].tex;
+		string imgName = xml.getValue("img", "photos/default.jpg");
+		p->load(imgName);
+
+		if (p->getWidth() != imgWidth)			//修正不规则图片并保存
+		{
+			p->resize(imgWidth, imgWidth / (p->getWidth() / p->getHeight()));
+			p->save(imgName);
+			//ofLogNotice() << imgName << " resize to: " << p->getWidth << "x" << p->getHeight() << endl;
+		}
+
+		int textNums = xml.getNumTags("text");
+		for (int j = 0; j < textNums;j++)
+		{
+			itemDatas[i].texts.push_back(xml.getValue("text", "数据未读取",j));
+		}
+		xml.popTag();
+	}
+
+	itemBacktex.load("photos/back.png");
 }

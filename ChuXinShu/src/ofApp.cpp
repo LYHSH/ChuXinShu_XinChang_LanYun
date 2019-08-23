@@ -2,8 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	goToLoop();
-	//goToShowing();
+	ofLogToConsole();
+	//goToLoop();
+	goToShowing();
 
 	myItemMgr.setup();
 
@@ -28,8 +29,9 @@ void ofApp::setup(){
 	{
 		fbo.allocate(SCREEN_W, SCREEN_H);
 	}
-
-	ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+	FreeConsole();
+	//ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+	ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	ofSetFrameRate(60);
 }
 
@@ -123,10 +125,10 @@ void ofApp::draw(){
 		break;
 	}
 
-	ofPushStyle();
-	ofSetColor(255, 0, 0);
-	ofDrawBitmapString(ofToString(backVideo.getPosition()), 20, 20);
-	ofPopStyle();
+// 	ofPushStyle();
+// 	ofSetColor(255, 0, 0);
+// 	ofDrawBitmapString(ofToString(backVideo.getPosition()), 20, 20);
+// 	ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -335,19 +337,22 @@ void ofApp::exit()
 void ofApp::touchDown(ofTouchEventArgs & touch) {
 	int x = touch.x * SCREEN_W;
 	int y = touch.y * SCREEN_H;
+
+	mousePressed(x, y, 0);
 }
 
 void ofApp::touchUp(ofTouchEventArgs & touch) { 
 	int x = touch.x * SCREEN_W;
 	int y = touch.y * SCREEN_H;
 
-	mouseReleased(x, y, 0);
+	//mouseReleased(x, y, 0);
 }
 
 void ofApp::touchMoved(ofTouchEventArgs & touch) {
 	int x = touch.x * SCREEN_W;
 	int y = touch.y * SCREEN_H;
 
-	mouseMoved(x, y);
+	//mouseMoved(x, y);
+	mousePressed(x, y,0);
 	
 }

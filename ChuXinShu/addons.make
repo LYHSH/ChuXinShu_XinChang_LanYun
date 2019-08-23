@@ -1,8 +1,10 @@
 ofxAvCodec
+ofxConstants
 ofxEasing
 ofxNetwork
 ofxOsc
 ofxPoco
+ofxTrueTypeFontUC
 ofxTuioWrapper
 ofxTweenzor
 ofxXmlSettings

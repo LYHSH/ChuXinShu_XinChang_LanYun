@@ -8,6 +8,7 @@
 #include "ofxUDPManager.h"
 #include "ofxTuioClient.h"
 #include "itemMgr.h"
+#include "ofxMyConstants.h"
 
 class ofApp : public ofBaseApp{
 

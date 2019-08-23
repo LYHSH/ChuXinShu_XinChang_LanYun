@@ -2,6 +2,7 @@
 #include "myContants.h"
 #include "showItem.h"
 #include "largeStars.h"
+#include "ofxXmlSettings.h"
 /************************************************************************/
 /* file:
 /* date:2019.8.14
@@ -24,13 +25,31 @@ public:
 
 	void reset();
 private:
+	struct ITEM_DATA
+	{
+		vector<string> texts;
+		ofImage * tex;
+	};
+
+	vector<ITEM_DATA> itemDatas;
+	ofImage itemBacktex;
+
+	int nextIndex = 0;
+	float const imgWidth = 550.0f;
+	float const boundSpace = 30.0f;
+	float middleX;
+	float lastRandomX;
+	float minBirthx;
+	float maxBirthx;
+
+
 	list<showItem *> items;
 
-	vector<ofRectangle> birthRects;
+	ofRectangle randomBirthRect;
+
+	void loadData();
 
 	showItem * createItem();
-
-	vector<ofImage> imgs;
 
 	largeStars star;
 };

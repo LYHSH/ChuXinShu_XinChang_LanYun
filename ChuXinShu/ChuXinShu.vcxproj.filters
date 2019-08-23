@@ -43,6 +43,9 @@
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxAvCodec\src\ofxAvVideoPlayer.cpp">
 			<Filter>addons\ofxAvCodec\src</Filter>
 		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxConstants\src\ofxMyConstants.cpp">
+			<Filter>addons\ofxConstants\src</Filter>
+		</ClCompile>
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.cpp">
 			<Filter>addons\ofxNetwork\src</Filter>
 		</ClCompile>
@@ -96,6 +99,9 @@
 		</ClCompile>
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxPoco\src\ofxXmlPoco.cpp">
 			<Filter>addons\ofxPoco\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\..\..\addons\ofxTrueTypeFontUC\src\ofxTrueTypeFontUC.cpp">
+			<Filter>addons\ofxTrueTypeFontUC\src</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioClient.cpp">
 			<Filter>addons\ofxTuioWrapper\src</Filter>
@@ -180,6 +186,12 @@
 		<Filter Include="addons\ofxAvCodec\libs\avcodec\include-vs">
 			<UniqueIdentifier>{5822F7DE-4973-156A-5F4D-A68E}</UniqueIdentifier>
 		</Filter>
+		<Filter Include="addons\ofxConstants">
+			<UniqueIdentifier>{E3754598-CA85-8CB3-071C-AB1A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxConstants\src">
+			<UniqueIdentifier>{1E6D5BC5-A69E-1B43-E70D-744D}</UniqueIdentifier>
+		</Filter>
 		<Filter Include="addons\ofxEasing">
 			<UniqueIdentifier>{CAD580FB-01DB-F456-F00B-7791}</UniqueIdentifier>
 		</Filter>
@@ -221,6 +233,12 @@
 		</Filter>
 		<Filter Include="addons\ofxPoco\src">
 			<UniqueIdentifier>{C7D4269D-D8A9-A7BB-531B-98DA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxTrueTypeFontUC">
+			<UniqueIdentifier>{5652952C-1675-EFF8-8E62-5D8C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxTrueTypeFontUC\src">
+			<UniqueIdentifier>{7E369600-03BF-EEFC-FA92-F38A}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons\ofxTuioWrapper">
 			<UniqueIdentifier>{493B74E7-DB7E-A4C2-A4A2-EC27}</UniqueIdentifier>
@@ -635,6 +653,9 @@
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxAvCodec\libs\avcodec\include-vs\inttypes.h">
 			<Filter>addons\ofxAvCodec\libs\avcodec\include-vs</Filter>
 		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxConstants\src\ofxMyConstants.h">
+			<Filter>addons\ofxConstants\src</Filter>
+		</ClInclude>
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxEasing\src\ofxEasing.h">
 			<Filter>addons\ofxEasing\src</Filter>
 		</ClInclude>
@@ -724,6 +745,9 @@
 		</ClInclude>
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxPoco\src\ofxXmlPoco.h">
 			<Filter>addons\ofxPoco\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\..\..\addons\ofxTrueTypeFontUC\src\ofxTrueTypeFontUC.h">
+			<Filter>addons\ofxTrueTypeFontUC\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\..\..\..\addons\ofxTuioWrapper\src\ofxTuioClient.h">
 			<Filter>addons\ofxTuioWrapper\src</Filter>
