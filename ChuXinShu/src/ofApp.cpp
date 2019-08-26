@@ -3,8 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofLogToConsole();
-	//goToLoop();
-	goToShowing();
+	goToLoop();
+	//goToShowing();
 
 	myItemMgr.setup();
 
@@ -31,12 +31,25 @@ void ofApp::setup(){
 	}
 	FreeConsole();
 	//ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
-	ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+	if (backVideo.isServering())
+	{
+		ofNoWindow();
+	}
+	else
+	{
+		ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+	}
+	
 	ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (backVideo.isServering())
+	{
+		ofNoWindow();
+	}
+
 	{
 		char data[100];
 		centerListener.Receive(data, 100);
@@ -45,11 +58,17 @@ void ofApp::update(){
 		{
 			if (msg == CMD_GOTO_LOOP)
 			{
-				goToLoop();
+				if (STATE_LOOP != gameState)
+				{
+					goToLoop();
+				}
 			}
 			else if (msg == CMD_GOTO_SWITCH)
 			{
-				goToSwitch();
+				if (STATE_SWITCH != gameState)
+				{
+					goToSwitch();
+				}
 			}
 		}
 	}
@@ -68,7 +87,7 @@ void ofApp::update(){
 		backVideo.update();
 
 		//if (!backVideo.isPlaying() && backVideo.getPosition() > 0.9f)
-		if (backVideo.getPosition() > 0.99f)
+		if (backVideo.getPosition() > 0.999f)
 		{
 			fbo.begin();
 			ofClear(0);
@@ -116,8 +135,16 @@ void ofApp::draw(){
 		break;
 	case ofApp::STATE_SHOWING:
 	{
-		backVideo.draw(0, -SCREEN_H + moveY, SCREEN_W, SCREEN_H);
-		fbo.draw(0,moveY,SCREEN_W,SCREEN_H);
+		//backVideo.draw(0, -SCREEN_H + moveY, SCREEN_W, SCREEN_H);
+		backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+		ofPushStyle();
+		ofEnableAlphaBlending();
+		float alpha = (1.0f - moveY / (float)SCREEN_H) * 255.0f;
+		//cout << alpha << endl;
+		ofSetColor(255, 255, 255, alpha);
+		fbo.draw(0,0,SCREEN_W,SCREEN_H);
+		//fbo.draw(0, moveY, SCREEN_W, SCREEN_H);
+		ofPopStyle();
 		myItemMgr.draw();
 	}
 		break;

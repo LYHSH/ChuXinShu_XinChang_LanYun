@@ -58,4 +58,5 @@ class ofApp : public ofBaseApp{
 		ofFbo fbo;
 		float initTime;
 		float moveY;
+		float alpha;
 };
