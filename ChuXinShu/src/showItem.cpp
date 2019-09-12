@@ -21,7 +21,8 @@ void showItem::setup(ofImage * _p,ofVec2f _pos)
 	pTex->setAnchorPercent(0.5f, 0.5f);
 	pos = _pos;
 
-	vec.set(0, 1.0f);
+	//vec.set(0, 1.0f);
+	vec.set(0, 2.0f);
 
 	rect.setFromCenter(pos, w, h);
 
