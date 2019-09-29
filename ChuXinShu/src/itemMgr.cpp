@@ -2,7 +2,7 @@
 
 itemMgr::itemMgr()
 {
-	
+	Tweenzor::init();
 }
 
 
@@ -21,6 +21,8 @@ void itemMgr::setup()
 		middleX = SCREEN_W * 0.5f;
 		lastRandomX = ofRandom(minBirthx, maxBirthx);
 	}
+
+	vec.set(0, 2.0f);
 	reset();
 }
 
@@ -47,11 +49,14 @@ void itemMgr::update()
 		}
 		else
 		{
-			(*ite)->update();
+			//(*ite)->update();
+			(*ite)->update(vec);
 			ite++;
 		}
 	}
 	star.update();
+
+	Tweenzor::update(ofGetElapsedTimeMillis());
 }
 
 void itemMgr::draw()
@@ -190,6 +195,8 @@ void itemMgr::reset()
 	}
 
 	nextIndex = 0;
+
+	Tweenzor::add(&vec, ofVec2f(0,10.0f), ofVec2f(0,2.0f),5.0f, EASE_LINEAR);
 }
 
 void itemMgr::loadData()

@@ -34,6 +34,7 @@ void ofApp::setup(){
 	if (backVideo.isServering())
 	{
 		ofNoWindow();
+		//ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	}
 	else
 	{
@@ -45,11 +46,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (backVideo.isServering())
-	{
-		ofNoWindow();
-	}
-
 	{
 		char data[100];
 		centerListener.Receive(data, 100);
@@ -350,6 +346,8 @@ void ofApp::goToShowing()
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NORMAL);
 	}
+
+	myItemMgr.reset();
 }
 
 void ofApp::exit()

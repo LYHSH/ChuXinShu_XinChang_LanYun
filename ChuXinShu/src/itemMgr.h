@@ -3,6 +3,7 @@
 #include "showItem.h"
 #include "largeStars.h"
 #include "ofxXmlSettings.h"
+#include "ofxTweenzor.h"
 /************************************************************************/
 /* file:
 /* date:2019.8.14
@@ -52,5 +53,8 @@ private:
 	showItem * createItem();
 
 	largeStars star;
+
+
+	ofVec2f vec;
 };
 

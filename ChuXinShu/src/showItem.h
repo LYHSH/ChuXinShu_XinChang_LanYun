@@ -19,6 +19,7 @@ public:
 	void setup(ofImage * _p, ofRectangle _rect,vector<string> _texts);
 	void setBackTex(ofImage * _tex);
 	void update();
+	void update(const ofVec2f &  _vec);
 	void draw();
 
 	void mouseMoved(int x, int y);

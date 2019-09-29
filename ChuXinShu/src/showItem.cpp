@@ -23,6 +23,7 @@ void showItem::setup(ofImage * _p,ofVec2f _pos)
 
 	//vec.set(0, 1.0f);
 	vec.set(0, 2.0f);
+	//vec.set(0, 4.0f);
 
 	rect.setFromCenter(pos, w, h);
 
@@ -53,6 +54,12 @@ void showItem::update()
 	Tweenzor::update(ofGetElapsedTimeMillis());
 
 	pos += vec;
+}
+
+void showItem::update(const ofVec2f & _vec)
+{
+	Tweenzor::update(ofGetElapsedTimeMillis());
+	pos += _vec;
 }
 
 void showItem::draw()
