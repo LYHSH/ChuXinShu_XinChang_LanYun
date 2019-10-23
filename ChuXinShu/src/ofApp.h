@@ -56,11 +56,6 @@ class ofApp : public ofBaseApp{
 		itemMgr myItemMgr;
 		bool isVideoShowing;				//互动阶段显示影片
 		ofVideoPlayer itemVideo;			//互动阶段影片
-
-		ofFbo fbo;
-		float initTime;
-		float moveY;
-		float alpha;
 		
 
 		float backVideoAlpha = 0.0f;

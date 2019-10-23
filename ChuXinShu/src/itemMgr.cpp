@@ -67,13 +67,14 @@ void itemMgr::draw()
 	}
 	star.draw();
 
-	ofPushStyle();
-	ofSetColor(255, 0, 0);
-	stringstream sss;
-	sss << "item nums:" << items.size() << endl;
-	sss << "fps:" << ofGetFrameRate() << endl;
-	ofDrawBitmapString(sss.str(),20,20);
-	ofPopStyle();
+// 	ofPushStyle();
+// 	ofSetColor(255, 0, 0);
+// 	stringstream sss;
+// 	sss << "item nums:" << items.size() << endl;
+// 	sss << "fps:" << ofGetFrameRate() << endl;
+// 	sss << "vec:" << vec << endl;
+// 	ofDrawBitmapString(sss.str(),20,50);
+// 	ofPopStyle();
 }
 
 showItem * itemMgr::createItem()
@@ -196,7 +197,8 @@ void itemMgr::reset()
 
 	nextIndex = 0;
 
-	Tweenzor::add(&vec, ofVec2f(0,10.0f), ofVec2f(0,2.0f),5.0f, EASE_LINEAR);
+	vec = ofVec2f(0,16.0f);
+	Tweenzor::add(&vec, ofVec2f(0,16.0f), ofVec2f(0,2.0f),1.0f,4.0f, EASE_IN_OUT_QUAD);
 }
 
 void itemMgr::loadData()

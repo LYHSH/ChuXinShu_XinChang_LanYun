@@ -2,7 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	Tweenzor::init();
 	ofLogToConsole();
+	//ofLogToFile("log.log", true);
 
 	{
 		ofxXmlSettings xml;
@@ -58,11 +60,7 @@ void ofApp::setup(){
 		ofAddListener(ofEvents().touchMoved, this, &ofApp::touchMoved);
 	}
 
-	{
-		fbo.allocate(SCREEN_W, SCREEN_H);
-	}
-
-	FreeConsole();
+	
 	//ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	if (backVideo.isServering())
 	{
@@ -76,11 +74,13 @@ void ofApp::setup(){
 		ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	}
 	
+	//FreeConsole();
 	ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	Tweenzor::update(ofGetElapsedTimeMillis());
 	{
 		char data[100];
 		centerListener.Receive(data, 100);
@@ -120,11 +120,6 @@ void ofApp::update(){
 		//if (!backVideo.isPlaying() && backVideo.getPosition() > 0.9f)
 		if (backVideo.getPosition() > 0.999f)
 		{
-			fbo.begin();
-			ofClear(0);
-			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
-			fbo.end();
-			initTime = ofGetElapsedTimef();
 			goToShowing();
 		}
 	}
@@ -140,11 +135,6 @@ void ofApp::update(){
 		else
 		{
 			myItemMgr.update();
-
-			auto duration = 1.0f;
-			auto endTime = initTime + duration;
-			auto now = ofGetElapsedTimef();
-			moveY = ofxeasing::map_clamp(now, initTime, endTime, 0.0f, SCREEN_H, &ofxeasing::linear::easeIn);
 		}
 		
 	}
@@ -181,18 +171,11 @@ void ofApp::draw(){
 		}
 		else
 		{
-			ofEnableAlphaBlending();
+			
 			ofPushStyle();
+			ofEnableAlphaBlending();
 			ofSetColor(255, 255, 255, backVideoAlpha);
 			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
-// 			ofPushStyle();
-// 			ofEnableAlphaBlending();
-// 			float alpha = (1.0f - moveY / (float)SCREEN_H) * 255.0f;
-// 			//cout << alpha << endl;
-// 			ofSetColor(255, 255, 255, alpha);
-// 			fbo.draw(0, 0, SCREEN_W, SCREEN_H);
-// 			//fbo.draw(0, moveY, SCREEN_W, SCREEN_H);
-// 			ofPopStyle();
 			myItemMgr.draw();
 			ofPopStyle();
 		}
@@ -201,11 +184,6 @@ void ofApp::draw(){
 	default:
 		break;
 	}
-
-// 	ofPushStyle();
-// 	ofSetColor(255, 0, 0);
-// 	ofDrawBitmapString(ofToString(backVideo.getPosition()), 20, 20);
-// 	ofPopStyle();
 }
 
 //--------------------------------------------------------------
@@ -371,6 +349,8 @@ void ofApp::goToLoop()
 	{
 		itemVideo.stop();
 	}
+
+	myItemMgr.reset();
 }
 
 void ofApp::goToSwitch()
@@ -419,7 +399,8 @@ void ofApp::goToShowing()
 	{
 		myItemMgr.reset();
 
-		Tweenzor::add(&backVideoAlpha, 0.0f, 255.0f, 0.0f, 5.0f, EASE_IN_OUT_QUAD);
+		backVideoAlpha = 0.0f;
+		Tweenzor::add(&backVideoAlpha, 0.0f, 255.0f, 1.0f, 4.0f, EASE_IN_OUT_QUAD);
 	}
 	
 }

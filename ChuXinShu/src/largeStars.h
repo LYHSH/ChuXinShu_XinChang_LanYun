@@ -1,6 +1,5 @@
 #pragma once
 #include "ofMain.h"
-#include "ofxEasing.h"
 #include "myContants.h"
 #include "ofxTweenzor.h"
 #include "ofxTrueTypeFontUC.h"
