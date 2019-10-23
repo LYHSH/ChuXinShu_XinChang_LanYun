@@ -3,6 +3,29 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofLogToConsole();
+
+	{
+		ofxXmlSettings xml;
+		xml.load("config.xml");
+		isVideoShowing = xml.getValue("isVideoShowing", 0);
+		if (isVideoShowing)
+		{
+			ofDirectory dir;
+			dir.allowExt("mov");
+			dir.allowExt("mp4");
+			dir.allowExt("avi");
+			dir.listDir("itemVideo/");
+
+			if (dir.size())
+			{
+				itemVideo.load(dir.getPath(0));
+				itemVideo.setLoopState(OF_LOOP_NORMAL);
+				itemVideo.stop();
+			}
+		}
+	}
+
+
 	goToLoop();
 	//goToShowing();
 
@@ -13,6 +36,15 @@ void ofApp::setup(){
 		centerListener.SetNonBlocking(true);
 		centerListener.Bind(PORT_CENTER_CONTROL);
 	}
+	
+// 	ofSoundStreamSettings settings;
+// 	settings.setInListener(this);
+// 	settings.setOutListener(this);
+// 	settings.numOutputChannels = 2;
+// 	settings.numInputChannels = 0;
+// 	settings.sampleRate = 44100;
+// 	settings.bufferSize = 512;
+// 	settings.numBuffers = 4;
 
 	soundStream.setup(this, 2, 0, 44100, 512, 4);
 
@@ -29,12 +61,15 @@ void ofApp::setup(){
 	{
 		fbo.allocate(SCREEN_W, SCREEN_H);
 	}
+
 	FreeConsole();
 	//ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	if (backVideo.isServering())
 	{
-		ofNoWindow();
-		//ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+		ofxXmlSettings xml;
+		xml.load("window.xml");
+		bool noWindow = xml.getValue("no_window", 1);
+		noWindow ? ofNoWindow() : "";
 	}
 	else
 	{
@@ -98,12 +133,20 @@ void ofApp::update(){
  	case ofApp::STATE_SHOWING:
 	{
 		backVideo.update();
-		myItemMgr.update();
+		if (isVideoShowing)
+		{
+			itemVideo.update();
+		}
+		else
+		{
+			myItemMgr.update();
 
-		auto duration = 1.0f;
-		auto endTime = initTime + duration;
-		auto now = ofGetElapsedTimef();
-		moveY = ofxeasing::map_clamp(now, initTime, endTime, 0.0f, SCREEN_H, &ofxeasing::linear::easeIn);
+			auto duration = 1.0f;
+			auto endTime = initTime + duration;
+			auto now = ofGetElapsedTimef();
+			moveY = ofxeasing::map_clamp(now, initTime, endTime, 0.0f, SCREEN_H, &ofxeasing::linear::easeIn);
+		}
+		
 	}
 		
  		break;
@@ -131,17 +174,28 @@ void ofApp::draw(){
 		break;
 	case ofApp::STATE_SHOWING:
 	{
-		//backVideo.draw(0, -SCREEN_H + moveY, SCREEN_W, SCREEN_H);
-		backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
-		ofPushStyle();
-		ofEnableAlphaBlending();
-		float alpha = (1.0f - moveY / (float)SCREEN_H) * 255.0f;
-		//cout << alpha << endl;
-		ofSetColor(255, 255, 255, alpha);
-		fbo.draw(0,0,SCREEN_W,SCREEN_H);
-		//fbo.draw(0, moveY, SCREEN_W, SCREEN_H);
-		ofPopStyle();
-		myItemMgr.draw();
+		if (isVideoShowing)
+		{
+			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+			itemVideo.draw(0,0,SCREEN_W,SCREEN_H);
+		}
+		else
+		{
+			ofEnableAlphaBlending();
+			ofPushStyle();
+			ofSetColor(255, 255, 255, backVideoAlpha);
+			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+// 			ofPushStyle();
+// 			ofEnableAlphaBlending();
+// 			float alpha = (1.0f - moveY / (float)SCREEN_H) * 255.0f;
+// 			//cout << alpha << endl;
+// 			ofSetColor(255, 255, 255, alpha);
+// 			fbo.draw(0, 0, SCREEN_W, SCREEN_H);
+// 			//fbo.draw(0, moveY, SCREEN_W, SCREEN_H);
+// 			ofPopStyle();
+			myItemMgr.draw();
+			ofPopStyle();
+		}
 	}
 		break;
 	default:
@@ -309,7 +363,14 @@ void ofApp::goToLoop()
 		backVideo.load(dir.getPath(0));
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NORMAL);
+		backVideo.setVolume(1.0f);
 	}	
+
+
+	if (isVideoShowing)
+	{
+		itemVideo.stop();
+	}
 }
 
 void ofApp::goToSwitch()
@@ -327,6 +388,7 @@ void ofApp::goToSwitch()
 		backVideo.load(dir.getPath(0));
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NONE);
+		backVideo.setVolume(1.0f);
 	}
 }
 
@@ -345,9 +407,21 @@ void ofApp::goToShowing()
 		backVideo.load(dir.getPath(0));
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NORMAL);
+		backVideo.setVolume(0.5f);
 	}
 
-	myItemMgr.reset();
+	if (isVideoShowing)
+	{
+		itemVideo.stop();
+		itemVideo.play();
+	}
+	else
+	{
+		myItemMgr.reset();
+
+		Tweenzor::add(&backVideoAlpha, 0.0f, 255.0f, 0.0f, 5.0f, EASE_IN_OUT_QUAD);
+	}
+	
 }
 
 void ofApp::exit()

@@ -130,7 +130,8 @@ void largeStars::doShowing(ofImage * _tex, ofRectangle _birthRect)
 	float h = SCREEN_W * (_pTex->getHeight() / _pTex->getWidth());
 
 	//targetRect.setFromCenter(SCREEN_W / 2, SCREEN_H / 2, w , h);
-	targetRect.setFromCenter(SCREEN_W / 2, 1442, w, h);
+	//targetRect.setFromCenter(SCREEN_W / 2, 1442, w, h);
+	targetRect.setFromCenter(SCREEN_W / 2, 1542, w, h);		//画面整体下移100
 
 	Tweenzor::add(&rect, rect, targetRect, 0.0f, duration, EASE_IN_OUT_BACK,0.8);
 	Tweenzor::add(&alpha, alpha, fullMaskAlpha, 0.0f, duration + 0.1f, EASE_OUT_QUAD);
