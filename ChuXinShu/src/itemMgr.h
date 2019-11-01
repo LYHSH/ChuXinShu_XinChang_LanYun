@@ -25,6 +25,8 @@ public:
 	void mouseReleased(int x, int y, int button);
 
 	void reset();
+	void doTweenVec();
+	string debugMessage()const;
 private:
 	struct ITEM_DATA
 	{
@@ -38,10 +40,10 @@ private:
 	int nextIndex = 0;
 	float const imgWidth = 550.0f;
 	float const boundSpace = 30.0f;
-	float middleX;
-	float lastRandomX;
-	float minBirthx;
-	float maxBirthx;
+	float middleX = 0.0f;
+	float lastRandomX = 0.0f;
+	float minBirthx = 0.0f;
+	float maxBirthx = 0.0f;
 
 
 	list<showItem *> items;

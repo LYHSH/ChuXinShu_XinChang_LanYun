@@ -22,7 +22,7 @@ void itemMgr::setup()
 		lastRandomX = ofRandom(minBirthx, maxBirthx);
 	}
 
-	vec.set(0, 2.0f);
+	vec.set(0, 0.0f);
 	reset();
 }
 
@@ -197,8 +197,22 @@ void itemMgr::reset()
 
 	nextIndex = 0;
 
-	vec = ofVec2f(0,16.0f);
-	Tweenzor::add(&vec, ofVec2f(0,16.0f), ofVec2f(0,2.0f),1.0f,4.0f, EASE_IN_OUT_QUAD);
+	vec.set(0.0f, 0.0f);
+}
+
+void itemMgr::doTweenVec()
+{
+	vec = ofVec2f(0,20.0f);
+	Tweenzor::add(&vec, vec, ofVec2f(0, 2.0f), 0.0f, 4.0f, EASE_IN_OUT_QUAD);
+}
+
+string itemMgr::debugMessage()const
+{
+	
+	stringstream sss;
+	sss << "item nums:" << items.size() << endl;
+	sss << "vec:" << vec << endl;
+	return sss.str();
 }
 
 void itemMgr::loadData()

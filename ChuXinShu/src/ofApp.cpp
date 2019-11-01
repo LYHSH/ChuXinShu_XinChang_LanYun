@@ -21,15 +21,11 @@ void ofApp::setup(){
 			if (dir.size())
 			{
 				itemVideo.load(dir.getPath(0));
-				itemVideo.setLoopState(OF_LOOP_NORMAL);
+				itemVideo.setLoopState(OF_LOOP_NONE);
 				itemVideo.stop();
 			}
 		}
 	}
-
-
-	goToLoop();
-	//goToShowing();
 
 	myItemMgr.setup();
 
@@ -60,8 +56,13 @@ void ofApp::setup(){
 		ofAddListener(ofEvents().touchMoved, this, &ofApp::touchMoved);
 	}
 
-	
-	//ofSetWindowShape(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
+
+	{
+		fboimg.load("fboImg.jpg");
+
+		tipImg.load("tip.png");
+	}
+
 	if (backVideo.isServering())
 	{
 		ofxXmlSettings xml;
@@ -74,8 +75,11 @@ void ofApp::setup(){
 		ofScreenCrossTopmost(SCREEN_W * SCREEN_SCALE, SCREEN_H * SCREEN_SCALE);
 	}
 	
-	//FreeConsole();
+	FreeConsole();
 	ofSetFrameRate(60);
+
+
+	goToLoop();
 }
 
 //--------------------------------------------------------------
@@ -116,14 +120,11 @@ void ofApp::update(){
  	case ofApp::STATE_SWITCH:
 	{
 		backVideo.update();
-
-		//if (!backVideo.isPlaying() && backVideo.getPosition() > 0.9f)
-		if (backVideo.getPosition() > 0.999f)
+		if (backVideo.isPlaying() && backVideo.getPosition() > 0.99f)
 		{
 			goToShowing();
 		}
 	}
-		
  		break;
  	case ofApp::STATE_SHOWING:
 	{
@@ -138,7 +139,6 @@ void ofApp::update(){
 		}
 		
 	}
-		
  		break;
  	default:
  		break;
@@ -164,10 +164,23 @@ void ofApp::draw(){
 		break;
 	case ofApp::STATE_SHOWING:
 	{
+		fboimg.draw(0,0,SCREEN_W,SCREEN_H);
 		if (isVideoShowing)
 		{
+			ofPushStyle();
+			ofEnableAlphaBlending();
+			ofSetColor(255, 255, 255, backVideoAlpha);
 			backVideo.draw(0, 0, SCREEN_W, SCREEN_H);
-			itemVideo.draw(0,0,SCREEN_W,SCREEN_H);
+			if (!itemVideo.getIsMovieDone())
+			{
+				itemVideo.draw(0, 0, SCREEN_W, SCREEN_H);
+			}
+			else
+			{
+				tipImg.draw(0, 0, SCREEN_W, SCREEN_H);
+			}
+			
+			ofPopStyle();
 		}
 		else
 		{
@@ -184,6 +197,35 @@ void ofApp::draw(){
 	default:
 		break;
 	}
+
+	if (isDebug)
+	{
+		ofPushStyle();
+		stringstream sss;
+		switch (gameState)
+		{
+		case ofApp::STATE_LOOP:
+			sss << "state:" << "STATE_LOOP" << endl;
+			break;
+		case ofApp::STATE_SWITCH:
+			sss << "state:" << "STATE_SWITCH" << endl;
+			break;
+		case ofApp::STATE_SHOWING:
+			sss << "state:" << "STATE_SHOWING" << endl;
+			break;
+		default:
+			break;
+		}
+
+		sss << "video showing:" << isVideoShowing << endl;
+		sss << "itemMgr:" << myItemMgr.debugMessage() << endl;
+		sss << "backVideo pos:" << backVideo.getPosition() << endl;
+
+		ofSetColor(255, 0, 0);
+		ofDrawBitmapString(sss.str(),50,SCREEN_H/2);
+		ofPopStyle();
+	}
+	
 }
 
 //--------------------------------------------------------------
@@ -198,6 +240,9 @@ void ofApp::keyPressed(int key){
 		break;
 		goToShowing();  
 	case '3':
+		break;
+	case 'd':
+		isDebug = !isDebug;
 		break;
 	default:
 		break;
@@ -339,6 +384,7 @@ void ofApp::goToLoop()
 	if (dir.size())
 	{
 		backVideo.load(dir.getPath(0));
+		Sleep(10);
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NORMAL);
 		backVideo.setVolume(1.0f);
@@ -347,7 +393,8 @@ void ofApp::goToLoop()
 
 	if (isVideoShowing)
 	{
-		itemVideo.stop();
+		itemVideo.setFrame(0);
+		itemVideo.setPaused(true);
 	}
 
 	myItemMgr.reset();
@@ -365,7 +412,12 @@ void ofApp::goToSwitch()
 
 	if (dir.size())
 	{
-		backVideo.load(dir.getPath(0));
+		
+		if (!backVideo.load(dir.getPath(0)))
+		{
+			ofSystemAlertDialog("111111");
+		}
+		Sleep(10);
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NONE);
 		backVideo.setVolume(1.0f);
@@ -384,7 +436,11 @@ void ofApp::goToShowing()
 
 	if (dir.size())
 	{
-		backVideo.load(dir.getPath(0));
+		if (!backVideo.load(dir.getPath(0)))
+		{
+			ofSystemAlertDialog("111111");
+		}
+		Sleep(10);
 		backVideo.play();
 		backVideo.setLoopState(OF_LOOP_NORMAL);
 		backVideo.setVolume(0.5f);
@@ -392,15 +448,18 @@ void ofApp::goToShowing()
 
 	if (isVideoShowing)
 	{
-		itemVideo.stop();
+		itemVideo.setPaused(false);
 		itemVideo.play();
+		backVideoAlpha = 0.0f;
+		Tweenzor::add(&backVideoAlpha, backVideoAlpha, 255.0f, 0.0f, 1.0f, EASE_IN_OUT_QUAD);
 	}
 	else
 	{
 		myItemMgr.reset();
+		myItemMgr.doTweenVec();
 
 		backVideoAlpha = 0.0f;
-		Tweenzor::add(&backVideoAlpha, 0.0f, 255.0f, 1.0f, 4.0f, EASE_IN_OUT_QUAD);
+		Tweenzor::add(&backVideoAlpha, backVideoAlpha, 255.0f, 2.5f, 4.0f, EASE_IN_OUT_QUAD);
 	}
 	
 }

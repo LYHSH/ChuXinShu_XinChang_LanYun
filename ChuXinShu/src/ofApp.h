@@ -48,7 +48,6 @@ class ofApp : public ofBaseApp{
 		ofxUDPManager centerListener;
 
 		ofxTuioClient myTuio;
-
 		void touchDown(ofTouchEventArgs & touch);
 		void touchUp(ofTouchEventArgs & touch);
 		void touchMoved(ofTouchEventArgs & touch);
@@ -56,7 +55,13 @@ class ofApp : public ofBaseApp{
 		itemMgr myItemMgr;
 		bool isVideoShowing;				//互动阶段显示影片
 		ofVideoPlayer itemVideo;			//互动阶段影片
+		ofImage tipImg;
+
+		ofImage fboimg;
 		
 
 		float backVideoAlpha = 0.0f;
+
+
+		bool isDebug = false;
 };
